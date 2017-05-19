@@ -1,5 +1,7 @@
 package com.examples.android.homework.imdbparserex.adapter;
 
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,11 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.examples.android.homework.imdbparserex.FilmInformationActivity;
+import com.examples.android.homework.imdbparserex.MainActivity;
 import com.examples.android.homework.imdbparserex.entity.Film;
 import com.examples.android.homework.imdbparserex.entity.FilmsList;
 import com.examples.android.homework.imdbparserex.R;
 
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 public class RecicerViewAdapter extends android.support.v7.widget.RecyclerView.Adapter<RecicerViewAdapter.ViewHolder> {
     private final static String TAG = RecicerViewAdapter.class.getCanonicalName();
@@ -38,12 +44,13 @@ public class RecicerViewAdapter extends android.support.v7.widget.RecyclerView.A
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.filmLabel.setText(films.get(position).getTitle());
         holder.filmDate.setText(films.get(position).getYear());
         holder.filmRating.setText(films.get(position).getRating());
         holder.filmIcon.setImageBitmap(films.get(position).getImage());
         Log.d(TAG, "public void onBindViewHolder(ViewHolder holder, int position)");
+
     }
 
     @Override
@@ -57,6 +64,7 @@ public class RecicerViewAdapter extends android.support.v7.widget.RecyclerView.A
         TextView filmLabel;
         TextView filmDate;
         TextView filmRating;
+         CardView mCardView;
 
          ViewHolder(View itemView) {
             super(itemView);
@@ -64,6 +72,7 @@ public class RecicerViewAdapter extends android.support.v7.widget.RecyclerView.A
             filmLabel = (TextView) itemView.findViewById(R.id.card_film_title);
             filmDate = (TextView) itemView.findViewById(R.id.card_film_year);
             filmRating = (TextView) itemView.findViewById(R.id.card_film_rating);
+             mCardView = (CardView)itemView.findViewById(R.id.card_view);
         }
     }
 }
