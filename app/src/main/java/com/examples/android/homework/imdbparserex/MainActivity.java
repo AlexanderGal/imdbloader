@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     }
 
     private class FilmLoaderCallback implements LoaderManager.LoaderCallbacks<FilmsList> {

@@ -28,6 +28,8 @@ public class FilmParser {
     private Bitmap icon;
     private String date;
     private String rating;
+    private String filmId;
+    private String filmPath;
 
     public void parse(FilmsList result) {
         try {
@@ -61,7 +63,7 @@ public class FilmParser {
                 }
 
                 Log.d(TAG, title + " " + icon + " " + date + " " + rating);
-                result.addFilm(new Film(icon,title,date,rating));
+                result.addFilm(new Film(icon,title,date,rating,filmId));
             }
 
         } catch (IOException e) {
