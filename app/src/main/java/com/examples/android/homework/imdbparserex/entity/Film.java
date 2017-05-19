@@ -11,14 +11,26 @@ public class Film {
     private String title;
     private String rating;
     private String year;
+    private String filmId;
+
+
 
     public Film(){}
 
-    public Film(Bitmap icon, String title, String year, String rating) {
+    public Film(Bitmap icon, String title, String year, String rating, String filmId) {
         this.icon = icon;
         this.title = title;
         this.year = year;
         this.rating = rating;
+        this.filmId = filmId;
+    }
+
+    public String getFilmId() {
+        return filmId;
+    }
+
+    public void setFilmId(String filmId) {
+        this.filmId = filmId;
     }
 
     public Bitmap getImage() {

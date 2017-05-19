@@ -53,9 +53,9 @@ public class FilmInformationActivity extends AppCompatActivity {
         mMoviePlot = (TextView)findViewById(R.id.movie_plot);
 
         mProgressBar = (ProgressBar)findViewById(R.id.movie_info_loading);
-
+        String movieTitle = getIntent().getStringExtra("movieTitle");
         try {
-            mFilmInformationUrl = new URL("http://www.omdbapi.com/?t=The+Shawshank+Redemption&plot=full");
+            mFilmInformationUrl = new URL("http://www.omdbapi.com/?t="+getIntent().getStringExtra("movieTitle")+"&plot=full");
         } catch(IOException ex){
             Log.e(TAG,ex.getMessage());
         }
