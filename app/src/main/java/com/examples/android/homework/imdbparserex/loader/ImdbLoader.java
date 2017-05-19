@@ -28,8 +28,8 @@ public class ImdbLoader extends AsyncTaskLoader<FilmsList> {
 
     public ImdbLoader(Context context,FilmsList list,FilmParser parser) {
         super(context);
-        listWeakReference = new WeakReference<FilmsList>(list);
-        parserWeakReference = new WeakReference<FilmParser>(parser);
+        listWeakReference = new WeakReference<>(list);
+        parserWeakReference = new WeakReference<>(parser);
         Log.d(TAG, "public ImdbLoader(Context context,FilmsList list)");
     }
 
@@ -38,7 +38,9 @@ public class ImdbLoader extends AsyncTaskLoader<FilmsList> {
         Log.d(TAG, " public FilmsList loadInBackground()");
         FilmsList result = listWeakReference.get();
         FilmParser parser = parserWeakReference.get();
-        parser.parse(result);
+        if (result.isEmpty()) {
+            parser.parse(result);
+        }
         return result;
     }
 }
