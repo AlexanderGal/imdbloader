@@ -28,8 +28,6 @@ public class FilmInformationParser {
         String jsonString = null;
 
         try {
-
-
             HttpURLConnection urlConnection = (HttpURLConnection) movieInfoUrl.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();

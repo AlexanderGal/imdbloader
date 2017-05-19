@@ -25,8 +25,14 @@ public class ImdbLoader extends AsyncTaskLoader<FilmsList> {
     WeakReference<FilmsList> listWeakReference;
     WeakReference<FilmParser> parserWeakReference;
 
+    @Override
+    protected void onStartLoading() {
+        Log.d(TAG,"protected void onStartLoading ()");
+        super.onStartLoading();
+        forceLoad();
+    }
 
-    public ImdbLoader(Context context,FilmsList list,FilmParser parser) {
+    public ImdbLoader(Context context, FilmsList list, FilmParser parser) {
         super(context);
         listWeakReference = new WeakReference<>(list);
         parserWeakReference = new WeakReference<>(parser);

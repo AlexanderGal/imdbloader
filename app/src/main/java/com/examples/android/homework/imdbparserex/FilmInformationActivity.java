@@ -23,7 +23,6 @@ import java.net.URL;
  */
 
 public class FilmInformationActivity extends AppCompatActivity {
-
     private static final String TAG = "FilmInformationActivity";
     private static final int FILM_INFORMATION_LOADER_ID = 777;
 
@@ -46,35 +45,34 @@ public class FilmInformationActivity extends AppCompatActivity {
 
         mMovieTitle = (TextView) findViewById(R.id.movie_title);
         mMovieIcon = (ImageView) findViewById(R.id.movie_icon);
-        mMovieYear = (TextView)findViewById(R.id.movie_year);
-        mMovieRating = (TextView)findViewById(R.id.imdb_rating);
-        mMovieVotes = (TextView)findViewById(R.id.imdb_votes);
-        mMovieActors = (TextView)findViewById(R.id.movie_actors);
-        mMoviePlot = (TextView)findViewById(R.id.movie_plot);
+        mMovieYear = (TextView) findViewById(R.id.movie_year);
+        mMovieRating = (TextView) findViewById(R.id.imdb_rating);
+        mMovieVotes = (TextView) findViewById(R.id.imdb_votes);
+        mMovieActors = (TextView) findViewById(R.id.movie_actors);
+        mMoviePlot = (TextView) findViewById(R.id.movie_plot);
 
-        mProgressBar = (ProgressBar)findViewById(R.id.movie_info_loading);
         String movieTitle = getIntent().getStringExtra("movieTitle");
         try {
-            mFilmInformationUrl = new URL("http://www.omdbapi.com/?t="+getIntent().getStringExtra("movieTitle")+"&plot=full");
-        } catch(IOException ex){
-            Log.e(TAG,ex.getMessage());
+            mFilmInformationUrl = new URL("http://www.omdbapi.com/?i=" + getIntent().getStringExtra("movieID"));
+        } catch (IOException ex) {
+            Log.e(TAG, ex.getMessage());
         }
 
-        getSupportLoaderManager().initLoader(FILM_INFORMATION_LOADER_ID,null,new FilmInformationLoaderCallbacks()).forceLoad();
+        getSupportLoaderManager().initLoader(FILM_INFORMATION_LOADER_ID, null, new FilmInformationLoaderCallbacks()).forceLoad();
+
 
 
     }
 
-    private class FilmInformationLoaderCallbacks implements LoaderManager.LoaderCallbacks<FilmInformation>{
+    private class FilmInformationLoaderCallbacks implements LoaderManager.LoaderCallbacks<FilmInformation> {
 
         @Override
         public Loader<FilmInformation> onCreateLoader(int id, Bundle args) {
-            return new FilmInformationLoader(FilmInformationActivity.this,mFilmInformationUrl,new FilmInformationParser());
+            return new FilmInformationLoader(FilmInformationActivity.this, mFilmInformationUrl, new FilmInformationParser());
         }
 
         @Override
         public void onLoadFinished(Loader<FilmInformation> loader, FilmInformation data) {
-            mProgressBar.setVisibility(View.GONE);
             mMovieTitle.setText(data.getMovieTitle());
             mMoviePlot.setText(data.getMoviePlot());
             mMovieActors.setText(data.getMovieActors());
@@ -83,7 +81,7 @@ public class FilmInformationActivity extends AppCompatActivity {
             mMovieYear.setText(data.getMovieYear());
             mMovieIcon.setImageBitmap(data.getMovieIcon());
 
-            Log.d(TAG,"onLoadFinished");
+            Log.d(TAG, "onLoadFinished");
         }
 
         @Override

@@ -4,7 +4,7 @@
     <dimen name="card_image_view_height">100dp</dimen>
     <dimen name="card_height">100dp</dimen>
     <dimen name="padding">8dp</dimen>
-    <dimen name="card_corner_radius">4dp</dimen>
+    <dimen name="card_corner_radius">6dp</dimen>
     <dimen name="star_icon_padding">4dp</dimen>
     <dimen name="margin_top">10dp</dimen>
     <dimen name="padding_text">10dp</dimen>

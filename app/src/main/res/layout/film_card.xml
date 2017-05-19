@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/card_height"
     android:layout_margin="@dimen/padding"
-    app:cardCornerRadius="@dimen/card_corner_radius">
+    app:cardBackgroundColor="@color/colorCardBackground"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="@dimen/cardview_default_elevation">
 
     <RelativeLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorCardBackground"
         android:padding="@dimen/padding">
 
         <ImageView
@@ -54,8 +54,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:drawableLeft="@drawable/star"
-            android:drawableStart="@drawable/star"
             android:drawablePadding="@dimen/star_icon_padding"
+            android:drawableStart="@drawable/star"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             tools:text="8,53" />
     </RelativeLayout>

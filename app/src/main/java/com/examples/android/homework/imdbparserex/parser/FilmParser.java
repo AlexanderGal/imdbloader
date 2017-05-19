@@ -36,23 +36,18 @@ public class FilmParser {
             Document document = Jsoup.connect("http://www.imdb.com/chart/top").get();
             Element element = document.getElementsByAttributeValue("data-caller-name", "chart-top250movie").get(0);
             Elements rowElem = element.getElementsByTag("tr");
+            rowElem.remove(0);
             InputStream is = null;
-            int i = 0;
             for (Element elem : rowElem) {
-
-                if (elem == rowElem.get(0)) {
-                    continue;
-                }
-
                 // load 250 taking too much time
-               if(rowElem.indexOf(elem)>=20)return;
+//               if(rowElem.indexOf(elem)>=20)return;
                 title = elem.select(".titleColumn > a").text();
                 date = elem.select("span.secondaryInfo").text();
                 rating = elem.select("td.ratingColumn > strong").text();
-                String iconURL = elem.select("img").first().absUrl("src");
+                filmId = elem.select("div.wlb_ribbon").first().attr("data-tconst");
 
                 try {
-                    is = new URL(iconURL).openConnection().getInputStream();
+                    is = new URL(elem.select("img").first().absUrl("src")).openConnection().getInputStream();
                     icon = BitmapFactory.decodeStream(is);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -62,7 +57,7 @@ public class FilmParser {
                     }
                 }
 
-                Log.d(TAG, title + " " + icon + " " + date + " " + rating);
+                Log.d(TAG, title + " " + icon + " " + date + " " + rating+ " " + filmId);
                 result.addFilm(new Film(icon,title,date,rating,filmId));
             }
 

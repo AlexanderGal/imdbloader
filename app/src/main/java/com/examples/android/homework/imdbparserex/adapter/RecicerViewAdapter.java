@@ -12,22 +12,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.examples.android.homework.imdbparserex.FilmInformationActivity;
-import com.examples.android.homework.imdbparserex.MainActivity;
 import com.examples.android.homework.imdbparserex.entity.Film;
 import com.examples.android.homework.imdbparserex.entity.FilmsList;
 import com.examples.android.homework.imdbparserex.R;
 
 import java.util.List;
 
-import static java.security.AccessController.getContext;
-
 public class RecicerViewAdapter extends android.support.v7.widget.RecyclerView.Adapter<RecicerViewAdapter.ViewHolder> {
     private final static String TAG = RecicerViewAdapter.class.getCanonicalName();
+
     private List<Film> films;
+    private Context mContext;
 
-    private  Context mContext;
-
-    public RecicerViewAdapter(FilmsList list){
+    public RecicerViewAdapter(FilmsList list) {
         this.films = list.getList();
         Log.d(TAG, "public RecicerViewAdapter(FilmsList list)");
     }
@@ -40,9 +37,7 @@ public class RecicerViewAdapter extends android.support.v7.widget.RecyclerView.A
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.film_card,parent,false);
-
-
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.film_card, parent, false);
         Log.d(TAG, "public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)");
         return new ViewHolder(view);
     }
@@ -63,32 +58,32 @@ public class RecicerViewAdapter extends android.support.v7.widget.RecyclerView.A
         return films.size();
     }
 
-     class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         ImageView filmIcon;
         TextView filmLabel;
         TextView filmDate;
         TextView filmRating;
-         CardView mCardView;
+        CardView mCardView;
 
-         ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-             mContext = itemView.getContext();
-
-             itemView.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View v) {
-                     Intent intent = new Intent(mContext, FilmInformationActivity.class);
-                     intent.putExtra("movieTitle",films.get(getAdapterPosition()).getFilmId());
-                     Log.e(TAG,"onclick"+films.get(getAdapterPosition()).getFilmId());
-                     mContext.startActivity(intent);
-                 }
-             });
-
+            mContext = itemView.getContext();
             filmIcon = (ImageView) itemView.findViewById(R.id.card_image_view);
             filmLabel = (TextView) itemView.findViewById(R.id.card_film_title);
             filmDate = (TextView) itemView.findViewById(R.id.card_film_year);
             filmRating = (TextView) itemView.findViewById(R.id.card_film_rating);
-             mCardView = (CardView)itemView.findViewById(R.id.card_view);
+
+
+            mCardView = (CardView) itemView.findViewById(R.id.card_view);
+            mCardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, FilmInformationActivity.class);
+                    intent.putExtra("movieID", films.get(getAdapterPosition()).getFilmId());
+                    Log.e(TAG, "onclick" + films.get(getAdapterPosition()).getFilmId());
+                    mContext.startActivity(intent);
+                }
+            });
         }
     }
 }

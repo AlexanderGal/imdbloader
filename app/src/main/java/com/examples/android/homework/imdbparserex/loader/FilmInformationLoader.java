@@ -24,7 +24,7 @@ public class FilmInformationLoader extends AsyncTaskLoader<FilmInformation> {
 
     public FilmInformationLoader(Context context, URL filmInfoUrl, FilmInformationParser filmInformationParser) {
         super(context);
-        this.mParserWeakReference = new WeakReference<FilmInformationParser>(filmInformationParser);
+        this.mParserWeakReference = new WeakReference<>(filmInformationParser);
         this.filmInfoUrl = filmInfoUrl;
     }
 

@@ -68,10 +68,11 @@ public class Film {
     @Override
     public String toString() {
         return "Film{" +
-                "image ='" + icon.toString() + '\'' +
+                "icon=" + icon +
                 ", title='" + title + '\'' +
-                ", year='" + year + '\'' +
                 ", rating='" + rating + '\'' +
+                ", year='" + year + '\'' +
+                ", filmId='" + filmId + '\'' +
                 '}';
     }
 }
