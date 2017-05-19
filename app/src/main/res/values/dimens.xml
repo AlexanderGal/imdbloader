@@ -9,4 +9,6 @@
     <dimen name="margin_top">10dp</dimen>
     <dimen name="padding_text">10dp</dimen>
     <dimen name="padding_plot">5dp</dimen>
+    <dimen name="icon_width">120dp</dimen>
+    <dimen name="icon_height">180dp</dimen>
 </resources>
