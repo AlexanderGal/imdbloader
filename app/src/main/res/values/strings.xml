@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">ImdbParserEx</string>
+    <string name="app_name">IMDB Top Rated Movies</string>
     <string name="loading">Загрузка</string>
 </resources>
