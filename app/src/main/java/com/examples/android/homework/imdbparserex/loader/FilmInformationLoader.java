@@ -16,7 +16,7 @@ import java.net.URL;
  */
 
 public class FilmInformationLoader extends AsyncTaskLoader<FilmInformation> {
-    private static final String TAG = "FilmInformationLoader";
+    private static final String TAG = FilmInformationLoader.class.getCanonicalName();
 
     private URL filmInfoUrl;
     WeakReference<FilmInformationParser> mParserWeakReference;
@@ -37,7 +37,7 @@ public class FilmInformationLoader extends AsyncTaskLoader<FilmInformation> {
     @Override
     public FilmInformation loadInBackground() {
         FilmInformationParser filmInformationParser = mParserWeakReference.get();
-        Log.d(TAG,"loadInBackground ");
+        Log.d(TAG, "loadInBackground ");
         return filmInformationParser.parseInfo(filmInfoUrl);
     }
 }

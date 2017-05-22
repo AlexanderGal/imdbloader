@@ -1,6 +1,5 @@
 package com.examples.android.homework.imdbparserex.parser;
 
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
@@ -21,7 +20,7 @@ import java.net.URL;
  */
 
 public class FilmInformationParser {
-    private static final String TAG = "FilmInformationParser";
+    private static final String TAG = FilmInformationParser.class.getCanonicalName();
 
     public FilmInformation parseInfo(URL movieInfoUrl){
         FilmInformation filmInformation = new FilmInformation();
@@ -50,16 +49,16 @@ public class FilmInformationParser {
 
         try {
             JSONObject jsonObject = new JSONObject(jsonString);
-            filmInformation.setMovieTitle(jsonObject.getString("Title"));
-            filmInformation.setMovieYear(jsonObject.getString("Year"));
-            filmInformation.setMovieActors(jsonObject.getString("Actors"));
-            filmInformation.setMovieVotes(jsonObject.getString("imdbVotes"));
-            filmInformation.setMoviePlot(jsonObject.getString("Plot"));
-            filmInformation.setMovieRating(jsonObject.getString("imdbRating"));
+            filmInformation.setTitle(jsonObject.getString("Title"));
+            filmInformation.setYear(jsonObject.getString("Year"));
+            filmInformation.setActors(jsonObject.getString("Actors"));
+            filmInformation.setVotes(jsonObject.getString("imdbVotes"));
+            filmInformation.setPlot(jsonObject.getString("Plot"));
+            filmInformation.setRating(jsonObject.getString("imdbRating"));
             InputStream movieIconInputStream = null;
             try {
                 movieIconInputStream = new URL(jsonObject.getString("Poster")).openConnection().getInputStream();
-                filmInformation.setMovieIcon(BitmapFactory.decodeStream(movieIconInputStream));
+                filmInformation.setIcon(BitmapFactory.decodeStream(movieIconInputStream));
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {

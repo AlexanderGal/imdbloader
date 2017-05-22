@@ -2,7 +2,7 @@
     <string name="app_name">IMDB Top Rated Movies</string>
     <string name="loading">Загрузка</string>
     <string name="date">Date:</string>
-    <string name="imdb_rating">IMDB rating:</string>
+    <string name="imdb_rating">IMDB mRating:</string>
     <string name="votes">Votes:</string>
     <string name="actors">Actors</string>
     <string name="info">Info:</string>

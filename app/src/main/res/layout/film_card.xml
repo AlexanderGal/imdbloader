@@ -32,7 +32,7 @@
             android:layout_toEndOf="@+id/card_image_view"
             android:layout_toRightOf="@+id/card_image_view"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-            tools:text="Film title" />
+            tools:text="Film mTitle" />
 
         <TextView
             android:id="@+id/card_film_year"

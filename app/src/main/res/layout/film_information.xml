@@ -23,7 +23,7 @@
             app:cardUseCompatPadding="true">
 
             <TextView
-                android:id="@+id/movie_title"
+                android:id="@+id/movie_title_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/padding"
@@ -47,7 +47,7 @@
                 android:padding="@dimen/padding">
 
                 <ImageView
-                    android:id="@+id/movie_icon"
+                    android:id="@+id/movie_icon_imageview"
                     android:layout_width="120dp"
                     android:layout_height="180dp"
                     tools:src="@mipmap/ic_launcher" />
@@ -60,13 +60,13 @@
                     android:layout_marginLeft="51dp"
                     android:layout_marginStart="51dp"
                     android:layout_marginTop="43dp"
-                    android:layout_toEndOf="@+id/movie_icon"
-                    android:layout_toRightOf="@+id/movie_icon"
+                    android:layout_toEndOf="@+id/movie_icon_imageview"
+                    android:layout_toRightOf="@+id/movie_icon_imageview"
                     android:text="@string/date"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
                 <TextView
-                    android:id="@+id/movie_year"
+                    android:id="@+id/movie_year_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@id/film_date"
@@ -86,7 +86,7 @@
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
                 <TextView
-                    android:id="@+id/imdb_rating"
+                    android:id="@+id/imdb_rating_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@id/imdb_rating_label"
@@ -106,7 +106,7 @@
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
                 <TextView
-                    android:id="@+id/imdb_votes"
+                    android:id="@+id/imdb_votes_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@id/imdb_user_votes"
@@ -149,7 +149,7 @@
                         tools:text="Actors:" />
 
                     <TextView
-                        android:id="@+id/movie_actors"
+                        android:id="@+id/movie_actors_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/padding_plot"
@@ -182,7 +182,7 @@
                         tools:text="Info:" />
 
                     <TextView
-                        android:id="@+id/movie_plot"
+                        android:id="@+id/movie_plot_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/padding_plot"

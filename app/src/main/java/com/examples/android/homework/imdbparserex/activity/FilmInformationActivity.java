@@ -1,4 +1,4 @@
-package com.examples.android.homework.imdbparserex;
+package com.examples.android.homework.imdbparserex.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,11 +6,10 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.examples.android.homework.imdbparserex.R;
 import com.examples.android.homework.imdbparserex.entity.FilmInformation;
 import com.examples.android.homework.imdbparserex.loader.FilmInformationLoader;
 import com.examples.android.homework.imdbparserex.parser.FilmInformationParser;
@@ -23,18 +22,16 @@ import java.net.URL;
  */
 
 public class FilmInformationActivity extends AppCompatActivity {
-    private static final String TAG = "FilmInformationActivity";
+    private static final String TAG = FilmInformationActivity.class.getCanonicalName();
     private static final int FILM_INFORMATION_LOADER_ID = 777;
 
-    private TextView mMovieTitle;
-    private ImageView mMovieIcon;
-    private TextView mMovieYear;
-    private TextView mMovieRating;
-    private TextView mMovieVotes;
-    private TextView mMovieActors;
-    private TextView mMoviePlot;
-
-    private ProgressBar mProgressBar;
+    private TextView mMovieTitleTextView;
+    private ImageView mMovieIconImageView;
+    private TextView mMovieYearTextView;
+    private TextView mMovieRatingTextView;
+    private TextView mMovieVotesTextView;
+    private TextView mMovieActorsTextView;
+    private TextView mMoviePlotTextView;
 
     private URL mFilmInformationUrl;
 
@@ -43,15 +40,14 @@ public class FilmInformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.film_information);
 
-        mMovieTitle = (TextView) findViewById(R.id.movie_title);
-        mMovieIcon = (ImageView) findViewById(R.id.movie_icon);
-        mMovieYear = (TextView) findViewById(R.id.movie_year);
-        mMovieRating = (TextView) findViewById(R.id.imdb_rating);
-        mMovieVotes = (TextView) findViewById(R.id.imdb_votes);
-        mMovieActors = (TextView) findViewById(R.id.movie_actors);
-        mMoviePlot = (TextView) findViewById(R.id.movie_plot);
+        mMovieTitleTextView = (TextView) findViewById(R.id.movie_title_textview);
+        mMovieIconImageView = (ImageView) findViewById(R.id.movie_icon_imageview);
+        mMovieYearTextView = (TextView) findViewById(R.id.movie_year_textview);
+        mMovieRatingTextView = (TextView) findViewById(R.id.imdb_rating_textview);
+        mMovieVotesTextView = (TextView) findViewById(R.id.imdb_votes_textview);
+        mMovieActorsTextView = (TextView) findViewById(R.id.movie_actors_textview);
+        mMoviePlotTextView = (TextView) findViewById(R.id.movie_plot_textview);
 
-        String movieTitle = getIntent().getStringExtra("movieTitle");
         try {
             mFilmInformationUrl = new URL("http://www.omdbapi.com/?i=" + getIntent().getStringExtra("movieID"));
         } catch (IOException ex) {
@@ -59,9 +55,6 @@ public class FilmInformationActivity extends AppCompatActivity {
         }
 
         getSupportLoaderManager().initLoader(FILM_INFORMATION_LOADER_ID, null, new FilmInformationLoaderCallbacks()).forceLoad();
-
-
-
     }
 
     private class FilmInformationLoaderCallbacks implements LoaderManager.LoaderCallbacks<FilmInformation> {
@@ -73,20 +66,19 @@ public class FilmInformationActivity extends AppCompatActivity {
 
         @Override
         public void onLoadFinished(Loader<FilmInformation> loader, FilmInformation data) {
-            mMovieTitle.setText(data.getMovieTitle());
-            mMoviePlot.setText(data.getMoviePlot());
-            mMovieActors.setText(data.getMovieActors());
-            mMovieRating.setText(data.getMovieRating());
-            mMovieVotes.setText(data.getMovieVotes());
-            mMovieYear.setText(data.getMovieYear());
-            mMovieIcon.setImageBitmap(data.getMovieIcon());
+            mMovieTitleTextView.setText(data.getTitle());
+            mMoviePlotTextView.setText(data.getPlot());
+            mMovieActorsTextView.setText(data.getActors());
+            mMovieRatingTextView.setText(data.getRating());
+            mMovieVotesTextView.setText(data.getVotes());
+            mMovieYearTextView.setText(data.getYear());
+            mMovieIconImageView.setImageBitmap(data.getIcon());
 
             Log.d(TAG, "onLoadFinished");
         }
 
         @Override
         public void onLoaderReset(Loader<FilmInformation> loader) {
-
         }
     }
 }
