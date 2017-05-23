@@ -7,62 +7,50 @@ import android.graphics.Bitmap;
  */
 
 public class Film {
+    public final static String IMDB_SITE = "http://www.imdb.com";
     private Bitmap mIcon;
     private String mTitle;
     private String mRating;
     private String mYear;
     private String mFilmId;
-
+    private String mURL;
 
     public Film() {
     }
 
-    public Film(Bitmap icon, String title, String year, String rating, String filmId) {
+    public Film(Bitmap icon, String title, String year, String rating, String filmId, String URL) {
         this.mIcon = icon;
         this.mTitle = title;
         this.mYear = year;
         this.mRating = rating;
         this.mFilmId = filmId;
+        this.mURL = IMDB_SITE + URL;
+
     }
 
     public String getFilmId() {
         return mFilmId;
     }
 
-    public void setFilmId(String mFilmId) {
-        this.mFilmId = mFilmId;
-    }
-
     public Bitmap getImage() {
         return mIcon;
-    }
-
-    public void setImageUrl(Bitmap imageUrl) {
-        this.mIcon = mIcon;
     }
 
     public String getTitle() {
         return mTitle;
     }
 
-    public void setTitle(String mTitle) {
-        this.mTitle = mTitle;
-    }
-
     public String getYear() {
         return mYear;
     }
 
-    public void setYear(String mYear) {
-        this.mYear = mYear;
+    public String getURL() {
+        return mURL;
     }
+
 
     public String getRating() {
         return mRating;
-    }
-
-    public void setRating(String mRating) {
-        this.mRating = mRating;
     }
 
     @Override

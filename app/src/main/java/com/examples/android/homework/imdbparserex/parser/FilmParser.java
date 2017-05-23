@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import com.examples.android.homework.imdbparserex.entity.Film;
+import com.examples.android.homework.imdbparserex.entity.FilmInformation;
 import com.examples.android.homework.imdbparserex.storage.FilmListStorage;
 
 import org.jsoup.Jsoup;
@@ -22,11 +23,6 @@ import java.net.URL;
 
 public class FilmParser {
     private final String TAG = this.getClass().getCanonicalName();
-    private String title;
-    private Bitmap icon;
-    private String date;
-    private String rating;
-    private String filmId;
 
     public void parse(FilmListStorage result) {
         try {
@@ -35,13 +31,15 @@ public class FilmParser {
             Elements rowElem = element.getElementsByTag("tr");
             rowElem.remove(0);
             InputStream is = null;
+            Bitmap icon = null;
             for (Element elem : rowElem) {
                 // load 250 taking too much time
                 if (rowElem.indexOf(elem) >= 10) return;
-                title = elem.select(".titleColumn > a").text();
-                date = elem.select("span.secondaryInfo").text();
-                rating = elem.select("td.ratingColumn > strong").text();
-                filmId = elem.select("div.wlb_ribbon").first().attr("data-tconst");
+                String mTitle = elem.select(".titleColumn > a").text();
+                String mDate = elem.select("span.secondaryInfo").text();
+                String mRating = elem.select("td.ratingColumn > strong").text();
+                String mFilmId = elem.select("div.wlb_ribbon").first().attr("data-tconst");
+                String mFilmUrl = elem.select("a").first().attr("href");
 
                 try {
                     is = new URL(elem.select("img").first().absUrl("src")).openConnection().getInputStream();
@@ -53,12 +51,44 @@ public class FilmParser {
                         is.close();
                     }
                 }
-                Log.d(TAG, title + " " + icon + " " + date + " " + rating + " " + filmId);
-                result.fillList(new Film(icon, title, date, rating, filmId));
+                Log.e(TAG, mTitle + " " + icon + " " + mDate + " " + mRating + " " + mFilmId + " " + mFilmUrl);
+                result.fillList(new Film(icon, mTitle, mDate, mRating, mFilmId, mFilmUrl));
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public FilmInformation parseFilmInfo(String mFilmUrl) {
+        FilmInformation filmInformation = new FilmInformation();
+        InputStream is = null;
+        Bitmap icon;
+        Document document;
+
+        try {
+            document = Jsoup.connect(mFilmUrl).get();
+            filmInformation.setTitle(document.getElementsByAttributeValue("itemprop", "name").first().text());
+            filmInformation.setYear(document.getElementById("titleYear").text());
+            filmInformation.setActors(document.getElementById("titleStoryLine").text());
+            filmInformation.setVotes(document.getElementsByAttributeValue("itemprop", "ratingCount").first().text());
+            filmInformation.setPlot(document.getElementsByAttributeValue("itemprop", "description").first().text());
+            filmInformation.setRating(document.getElementsByAttributeValue("itemprop", "ratingValue").first().text());
+
+            try {
+                is = new URL(document.select("div.poster").first().select("img").first().absUrl("src")).openConnection().getInputStream();
+                icon = BitmapFactory.decodeStream(is);
+                filmInformation.setIcon(icon);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (is != null) {
+                    is.close();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return filmInformation;
     }
 }

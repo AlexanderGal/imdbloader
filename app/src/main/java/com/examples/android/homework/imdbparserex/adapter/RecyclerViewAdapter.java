@@ -80,7 +80,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext().getApplicationContext(), FilmInformationActivity.class);
-                    intent.putExtra("movieID", mFilms.get(getAdapterPosition()).getFilmId());
+                    intent.putExtra("filmURL", mFilms.get(getAdapterPosition()).getURL());
                     v.getContext().getApplicationContext().startActivity(intent);
                 }
             });

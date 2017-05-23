@@ -6,9 +6,8 @@ import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
 import com.examples.android.homework.imdbparserex.entity.FilmInformation;
-import com.examples.android.homework.imdbparserex.parser.FilmInformationParser;
+import com.examples.android.homework.imdbparserex.parser.FilmParser;
 
-import java.lang.ref.WeakReference;
 import java.net.URL;
 
 /**
@@ -18,14 +17,14 @@ import java.net.URL;
 public class FilmInformationLoader extends AsyncTaskLoader<FilmInformation> {
     private static final String TAG = FilmInformationLoader.class.getCanonicalName();
 
-    private URL filmInfoUrl;
-    WeakReference<FilmInformationParser> mParserWeakReference;
+    private String mFilmInfoUrl;
+    private FilmParser mParser;
 
 
-    public FilmInformationLoader(Context context, URL filmInfoUrl, FilmInformationParser filmInformationParser) {
+    public FilmInformationLoader(Context context, String filmInfoUrl, FilmParser filmParser) {
         super(context);
-        this.mParserWeakReference = new WeakReference<>(filmInformationParser);
-        this.filmInfoUrl = filmInfoUrl;
+        this.mParser = filmParser;
+        this.mFilmInfoUrl = filmInfoUrl;
     }
 
     @Override
@@ -36,8 +35,7 @@ public class FilmInformationLoader extends AsyncTaskLoader<FilmInformation> {
 
     @Override
     public FilmInformation loadInBackground() {
-        FilmInformationParser filmInformationParser = mParserWeakReference.get();
         Log.d(TAG, "loadInBackground ");
-        return filmInformationParser.parseInfo(filmInfoUrl);
+        return mParser.parseFilmInfo(mFilmInfoUrl);
     }
 }
